@@ -1,7 +1,7 @@
 package com.knvovk.gamehub.domain.models.gamemin
 
 import com.knvovk.gamehub.domain.models.genre.GenreDb
-import com.knvovk.gamehub.domain.models.platformdetails.PlatformDetailsDb
+import com.knvovk.gamehub.domain.models.platform.PlatformDb
 
 data class GameMinDb(
     val id: Int,
@@ -9,7 +9,6 @@ data class GameMinDb(
     val released: String,
     val tba: Boolean,
     val metacritic: Int,
-    val playtime: Int,
-    val platforms: List<PlatformDetailsDb>,
+    val platforms: List<PlatformDb>,
     val genres: List<GenreDb>
 )

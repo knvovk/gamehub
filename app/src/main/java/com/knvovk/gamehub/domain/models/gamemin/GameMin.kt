@@ -1,8 +1,8 @@
 package com.knvovk.gamehub.domain.models.gamemin
 
 import com.knvovk.gamehub.domain.models.genre.Genre
-import com.knvovk.gamehub.domain.models.platformdetails.PlatformDetails
-import org.joda.time.LocalDate
+import com.knvovk.gamehub.domain.models.platform.Platform
+import java.time.LocalDate
 
 data class GameMin(
     val id: Int,
@@ -10,7 +10,6 @@ data class GameMin(
     val released: LocalDate,
     val tba: Boolean,
     val metacritic: Int,
-    val playtime: Int,
-    val platforms: List<PlatformDetails>,
+    val platforms: List<Platform>,
     val genres: List<Genre>
 )

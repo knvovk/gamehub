@@ -7,11 +7,11 @@ import com.knvovk.gamehub.domain.models.platform.PlatformNet
 class PlatformMapper : Mapper<PlatformDb, PlatformNet, Platform> {
 
     // TODO: Implement it
-    override fun mapDbModel(dbModel: PlatformDb): Platform {
+    override fun fromDb(dbModel: PlatformDb): Platform {
         return Platform.of(dbModel.id)
     }
 
-    override fun mapNetModel(netModel: PlatformNet): Platform {
+    override fun fromNet(netModel: PlatformNet): Platform {
         return Platform.of(netModel.id)
     }
 }

@@ -1,8 +1,8 @@
 package com.knvovk.gamehub.data.api
 
-import com.knvovk.gamehub.data.BASE_URL
-import com.knvovk.gamehub.data.USER_AGENT
-import com.knvovk.gamehub.data.api.services.GamesPageService
+import com.knvovk.gamehub.data.api.services.USER_AGENT
+import com.knvovk.gamehub.data.api.services.BASE_URL
+import com.knvovk.gamehub.data.api.services.GameService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -11,7 +11,7 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 
-object GamesPageServiceGenerator {
+object GameServiceGenerator {
 
     private val headerInterceptor = Interceptor { chain ->
         var request = chain.request()
@@ -37,5 +37,5 @@ object GamesPageServiceGenerator {
         .client(httpClient)
         .build()
 
-    fun create(): GamesPageService = retrofit.create()
+    fun create(): GameService = retrofit.create()
 }

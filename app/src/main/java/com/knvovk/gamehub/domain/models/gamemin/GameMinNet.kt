@@ -9,7 +9,6 @@ data class GameMinNet(
     val released: String,
     val tba: Boolean,
     val metacritic: Int,
-    val playtime: Int,
     val platforms: List<PlatformDetailsNet>,
     val genres: List<GenreNet>
 )

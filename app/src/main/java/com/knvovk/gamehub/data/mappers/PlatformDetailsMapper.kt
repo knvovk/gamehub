@@ -7,19 +7,19 @@ import com.knvovk.gamehub.domain.models.platformdetails.PlatformDetailsNet
 class PlatformDetailsMapper : Mapper<PlatformDetailsDb, PlatformDetailsNet, PlatformDetails> {
 
     // TODO: Implement it
-    override fun mapDbModel(dbModel: PlatformDetailsDb): PlatformDetails {
+    override fun fromDb(dbModel: PlatformDetailsDb): PlatformDetails {
         return PlatformDetails(
-            platform = PlatformMapper().mapDbModel(dbModel.platform),
+            platform = PlatformMapper().fromDb(dbModel.platform),
             releasedAt = LocalDateMapper().map(dbModel.released_at),
-            requirements = RequirementsMapper().mapDbModel(dbModel.requirements_en)
+            requirements = RequirementsMapper().fromDb(dbModel.requirements_en)
         )
     }
 
-    override fun mapNetModel(netModel: PlatformDetailsNet): PlatformDetails {
+    override fun fromNet(netModel: PlatformDetailsNet): PlatformDetails {
         return PlatformDetails(
-            platform = PlatformMapper().mapNetModel(netModel.platform),
+            platform = PlatformMapper().fromNet(netModel.platform),
             releasedAt = LocalDateMapper().map(netModel.released_at),
-            requirements = RequirementsMapper().mapNetModel(netModel.requirements_en)
+            requirements = RequirementsMapper().fromNet(netModel.requirements_en)
         )
     }
 }

@@ -7,36 +7,33 @@ import com.knvovk.gamehub.domain.models.gamemin.GameMinNet
 class GameMinMapper : Mapper<GameMinDb, GameMinNet, GameMin> {
 
     // TODO: Implement it
-    override fun mapDbModel(dbModel: GameMinDb): GameMin {
+    override fun fromDb(dbModel: GameMinDb): GameMin {
         return GameMin(
             id = dbModel.id,
             name = dbModel.name,
             released = LocalDateMapper().map(dbModel.released),
             tba = dbModel.tba,
             metacritic = dbModel.metacritic,
-            playtime = dbModel.playtime,
-            platforms = dbModel.platforms.map {
-                PlatformDetailsMapper().mapDbModel(it)
-            },
+            platforms = dbModel.platforms
+                .map { PlatformMapper().fromDb(it) },
             genres = dbModel.genres.map {
-                GenreMapper().mapDbModel(it)
+                GenreMapper().fromDb(it)
             }
         )
     }
 
-    override fun mapNetModel(netModel: GameMinNet): GameMin {
+    override fun fromNet(netModel: GameMinNet): GameMin {
         return GameMin(
             id = netModel.id,
             name = netModel.name,
             released = LocalDateMapper().map(netModel.released),
             tba = netModel.tba,
             metacritic = netModel.metacritic,
-            playtime = netModel.playtime,
-            platforms = netModel.platforms.map {
-                PlatformDetailsMapper().mapNetModel(it)
-            },
+            platforms = netModel.platforms
+                .map { PlatformDetailsMapper().fromNet(it) }
+                .map { it.platform },
             genres = netModel.genres.map {
-                GenreMapper().mapNetModel(it)
+                GenreMapper().fromNet(it)
             }
         )
     }
