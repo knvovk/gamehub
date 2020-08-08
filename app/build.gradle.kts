@@ -75,7 +75,11 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:$recyclerVersion")
     implementation("androidx.recyclerview:recyclerview-selection:$recyclerSelectionVersion")
 
-    // Material components
+    // Swipe Refresh Layout
+    val swipeVersion = "1.1.0"
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:$swipeVersion")
+
+    // MDC
     val materialVersion = "1.1.0"
     implementation("com.google.android.material:material:$materialVersion")
 
@@ -100,11 +104,11 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
 
-    // Paging
+    // Paging 2
     val pagingVersion = "2.1.2"
     implementation("androidx.paging:paging-runtime-ktx:$pagingVersion")
 
-    // Retrofit
+    // Retrofit 2
     val retrofitVersion = "2.9.0"
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
@@ -115,7 +119,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:$okHttpVersion")
     implementation("com.squareup.okhttp3:logging-interceptor:$okHttpVersion")
 
-    // RxJava
+    // RxJava 3
     val rxJavaVersion = "3.0.0"
     implementation("io.reactivex.rxjava3:rxjava:$rxJavaVersion")
     implementation("io.reactivex.rxjava3:rxandroid:$rxJavaVersion")

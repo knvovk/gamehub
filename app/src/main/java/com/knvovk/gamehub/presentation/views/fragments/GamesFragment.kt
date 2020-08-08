@@ -4,35 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.paging.PagedList
 import com.knvovk.gamehub.databinding.FragmentGamesBinding
 import com.knvovk.gamehub.domain.models.gamemin.GameMin
-import com.knvovk.gamehub.presentation.State
-import com.knvovk.gamehub.presentation.State.*
-import com.knvovk.gamehub.presentation.extensions.toast
+import com.knvovk.gamehub.presentation.NetworkState
+import com.knvovk.gamehub.presentation.adapters.GameAdapter
+import com.knvovk.gamehub.presentation.extensions.showIf
 import com.knvovk.gamehub.presentation.viewmodels.GamesViewModel
-import com.knvovk.gamehub.presentation.views.adapters.GameAdapter
 
 class GamesFragment : Fragment() {
 
     private var binding: FragmentGamesBinding? = null
-    private lateinit var progressBar: ContentLoadingProgressBar
-    private lateinit var recyclerGames: RecyclerView
-    private lateinit var gameAdapter: GameAdapter
+    private lateinit var adapter: GameAdapter
     private val viewModel by viewModels<GamesViewModel>()
-
-    private val stateObserver = Observer<State<List<GameMin>>> { state ->
-        when (state) {
-            is Success -> showData(state.data!!)
-            is Loading -> showLoading()
-            is Failure -> showError(state.msg!!)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,19 +27,12 @@ class GamesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGamesBinding.inflate(inflater, container, false)
-        progressBar = binding!!.progressBar
-        gameAdapter = GameAdapter()
-        recyclerGames = binding!!.recyclerGames.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = gameAdapter
-        }
         return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.state.observe(viewLifecycleOwner, stateObserver)
-        viewModel.onLoadInitial()
+        initRecyclerView()
     }
 
     override fun onDestroy() {
@@ -60,16 +40,39 @@ class GamesFragment : Fragment() {
         binding = null
     }
 
-    private fun showData(data: List<GameMin>) {
-        progressBar.hide()
-        gameAdapter.data = data
+    private fun initRecyclerView() {
+        adapter = GameAdapter(viewModel::retry)
+        binding!!.recyclerGames.adapter = adapter
+        viewModel.data.observe(
+            viewLifecycleOwner,
+            Observer<PagedList<GameMin>>(adapter::submitList)
+        )
+        viewModel.networkState.observe(
+            viewLifecycleOwner,
+            Observer<NetworkState>(adapter::setNetworkState)
+        )
+        viewModel.initialLoadState.observe(
+            viewLifecycleOwner,
+            Observer<NetworkState> { state ->
+                if (adapter.currentList != null) {
+                    if (adapter.currentList!!.isEmpty()) {
+                        setInitialLoadState(state)
+                    }
+                } else {
+                    setInitialLoadState(state)
+                }
+            }
+        )
     }
 
-    private fun showLoading() {
-        progressBar.show()
-    }
-
-    private fun showError(msg: String) {
-        toast(text = msg)
+    private fun setInitialLoadState(state: NetworkState?) {
+        with(binding!!) {
+            with(itemNetworkState) {
+                buttonRetryLoading.setOnClickListener { viewModel.retry() }
+                buttonRetryLoading.showIf(state == NetworkState.FAILURE)
+                textErrorLoading.showIf(state == NetworkState.FAILURE)
+                progressBarLoading.showIf(state == NetworkState.LOADING)
+            }
+        }
     }
 }

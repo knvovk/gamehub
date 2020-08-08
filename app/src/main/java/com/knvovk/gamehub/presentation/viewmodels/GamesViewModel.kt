@@ -1,48 +1,64 @@
 package com.knvovk.gamehub.presentation.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.knvovk.gamehub.data.api.GameServiceGenerator
-import com.knvovk.gamehub.data.implementations.GameRepositoryImpl
+import androidx.paging.Config
+import androidx.paging.PagedList
+import androidx.paging.toLiveData
+import com.knvovk.gamehub.data.api.services.GameService
 import com.knvovk.gamehub.data.mappers.GamesPageMapper
+import com.knvovk.gamehub.data.repositories.GameDataSource
 import com.knvovk.gamehub.domain.models.gamemin.GameMin
-import com.knvovk.gamehub.presentation.State
-import com.knvovk.gamehub.presentation.extensions.default
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import com.knvovk.gamehub.presentation.NetworkState
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.kotlin.addTo
-import io.reactivex.rxjava3.kotlin.subscribeBy
-import io.reactivex.rxjava3.schedulers.Schedulers
 
 class GamesViewModel : ViewModel() {
 
-    private val repo = GameRepositoryImpl(
-        service = GameServiceGenerator.create(),
-        mapper = GamesPageMapper()
-    )
     private val disposables = CompositeDisposable()
-    private val _state = MutableLiveData<State<List<GameMin>>>().default(State.Loading())
+    private val factory: GameDataSource.Factory
 
-    val state: LiveData<State<List<GameMin>>>
-        get() = _state
+    val data: LiveData<PagedList<GameMin>>
+    val initialLoadState: LiveData<NetworkState>
+    val networkState: LiveData<NetworkState>
 
-    fun onLoadInitial() {
-        repo.fetchTrendingGames()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(onNext = {
-                _state.value = State.Success(data = it)
-            }, onError = { error ->
-                _state.value = error.message?.let { State.Failure(msg = it) }
-                Log.e("GamesViewModel", "onInitLoad: ${error.message}", error)
-            })
-            .addTo(disposables)
+    companion object {
+        private const val pageSize = 15
+    }
+
+    init {
+        factory = GameDataSource.Factory(
+            service = GameService.create(),
+            mapper = GamesPageMapper(),
+            disposables = disposables
+        )
+        val config = Config(
+            pageSize = pageSize,
+            initialLoadSizeHint = pageSize
+        )
+        data = factory.toLiveData(config)
+        initialLoadState = Transformations
+            .switchMap<GameDataSource, NetworkState>(
+                factory.liveData,
+                GameDataSource::initialLoadState
+            )
+        networkState = Transformations
+            .switchMap<GameDataSource, NetworkState>(
+                factory.liveData,
+                GameDataSource::networkState
+            )
     }
 
     override fun onCleared() {
         super.onCleared()
         disposables.clear()
+    }
+
+    fun retry() {
+        factory.liveData.value!!.retry()
+    }
+
+    fun refresh() {
+        factory.liveData.value!!.invalidate()
     }
 }
