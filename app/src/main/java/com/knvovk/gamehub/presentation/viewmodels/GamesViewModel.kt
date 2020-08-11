@@ -9,7 +9,7 @@ import androidx.paging.toLiveData
 import com.knvovk.gamehub.data.api.services.GameService
 import com.knvovk.gamehub.data.mappers.GamesPageMapper
 import com.knvovk.gamehub.data.repositories.GameDataSource
-import com.knvovk.gamehub.domain.models.gamemin.GameMin
+import com.knvovk.gamehub.domain.models.gamemin.Game
 import com.knvovk.gamehub.presentation.NetworkState
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 
@@ -18,7 +18,7 @@ class GamesViewModel : ViewModel() {
     private val disposables = CompositeDisposable()
     private val factory: GameDataSource.Factory
 
-    val data: LiveData<PagedList<GameMin>>
+    val data: LiveData<PagedList<Game>>
     val initialLoadState: LiveData<NetworkState>
     val networkState: LiveData<NetworkState>
 

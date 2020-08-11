@@ -5,4 +5,7 @@
     <string name="err_something_went_wrong">Что-то пошло не так… \nПопробуйте обновить страницу.</string>
 
     <string name="button_retry_loading">Обновить</string>
+    <string name="desc_game_bg_img">Game background image</string>
+
+    <string name="text_delimiter">•</string>
 </resources>

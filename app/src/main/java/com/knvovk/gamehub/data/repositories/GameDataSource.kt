@@ -7,7 +7,7 @@ import androidx.paging.DataSource
 import androidx.paging.PageKeyedDataSource
 import com.knvovk.gamehub.data.api.services.GameService
 import com.knvovk.gamehub.data.mappers.GamesPageMapper
-import com.knvovk.gamehub.domain.models.gamemin.GameMin
+import com.knvovk.gamehub.domain.models.gamemin.Game
 import com.knvovk.gamehub.presentation.NetworkState
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
@@ -21,7 +21,7 @@ class GameDataSource(
     private val service: GameService,
     private val mapper: GamesPageMapper,
     private val disposables: CompositeDisposable
-) : PageKeyedDataSource<Int, GameMin>() {
+) : PageKeyedDataSource<Int, Game>() {
 
     private val _networkState = MutableLiveData<NetworkState>()
     private val _initialLoadState = MutableLiveData<NetworkState>()
@@ -43,7 +43,7 @@ class GameDataSource(
 
     override fun loadInitial(
         params: LoadInitialParams<Int>,
-        callback: LoadInitialCallback<Int, GameMin>
+        callback: LoadInitialCallback<Int, Game>
     ) {
         _initialLoadState.postValue(NetworkState.LOADING)
         _networkState.postValue(NetworkState.LOADING)
@@ -66,7 +66,7 @@ class GameDataSource(
             .addTo(disposables)
     }
 
-    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, GameMin>) {
+    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Game>) {
         _networkState.postValue(NetworkState.LOADING)
         service.getGamesByDate(
             release = date,
@@ -85,7 +85,7 @@ class GameDataSource(
             .addTo(disposables)
     }
 
-    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, GameMin>) {}
+    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Game>) {}
 
     fun retry() {
         if (retry != null) {
@@ -104,11 +104,11 @@ class GameDataSource(
         private val service: GameService,
         private val mapper: GamesPageMapper,
         private val disposables: CompositeDisposable
-    ) : DataSource.Factory<Int, GameMin>() {
+    ) : DataSource.Factory<Int, Game>() {
 
         val liveData = MutableLiveData<GameDataSource>()
 
-        override fun create(): DataSource<Int, GameMin> {
+        override fun create(): DataSource<Int, Game> {
             val source = GameDataSource(service, mapper, disposables)
             liveData.postValue(source)
             return source

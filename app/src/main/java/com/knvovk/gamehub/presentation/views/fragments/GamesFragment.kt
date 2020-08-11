@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
 import com.knvovk.gamehub.databinding.FragmentGamesBinding
-import com.knvovk.gamehub.domain.models.gamemin.GameMin
+import com.knvovk.gamehub.domain.models.gamemin.Game
 import com.knvovk.gamehub.presentation.NetworkState
 import com.knvovk.gamehub.presentation.adapters.GameAdapter
 import com.knvovk.gamehub.presentation.extensions.showIf
@@ -45,7 +45,7 @@ class GamesFragment : Fragment() {
         binding!!.recyclerGames.adapter = adapter
         viewModel.data.observe(
             viewLifecycleOwner,
-            Observer<PagedList<GameMin>>(adapter::submitList)
+            Observer<PagedList<Game>>(adapter::submitList)
         )
         viewModel.networkState.observe(
             viewLifecycleOwner,

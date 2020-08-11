@@ -87,6 +87,10 @@ dependencies {
     val cardViewVersion = "1.0.0"
     implementation("androidx.cardview:cardview:$cardViewVersion")
 
+    // Paris (for define and apply styles programmatically to Android views)
+    val parisVersion = "1.7.1"
+    implementation("com.airbnb.android:paris:$parisVersion")
+
     // Android KTX
     val coreKtxVersion = "1.3.0"
     val fragmentKtxVersion = "1.2.5"
@@ -118,6 +122,11 @@ dependencies {
     val okHttpVersion = "4.8.0"
     implementation("com.squareup.okhttp3:okhttp:$okHttpVersion")
     implementation("com.squareup.okhttp3:logging-interceptor:$okHttpVersion")
+
+    // Glide
+    val glideVersion = "4.11.0"
+    implementation("com.github.bumptech.glide:glide:$glideVersion")
+    kapt("com.github.bumptech.glide:compiler:$glideVersion")
 
     // RxJava 3
     val rxJavaVersion = "3.0.0"

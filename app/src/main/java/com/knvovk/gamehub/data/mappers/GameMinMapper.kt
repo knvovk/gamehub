@@ -1,15 +1,16 @@
 package com.knvovk.gamehub.data.mappers
 
-import com.knvovk.gamehub.domain.models.gamemin.GameMin
-import com.knvovk.gamehub.domain.models.gamemin.GameMinDb
-import com.knvovk.gamehub.domain.models.gamemin.GameMinNet
+import com.knvovk.gamehub.domain.models.gamemin.Game
+import com.knvovk.gamehub.domain.models.gamemin.GameDb
+import com.knvovk.gamehub.domain.models.gamemin.GameNet
 
-class GameMinMapper : Mapper<GameMinDb, GameMinNet, GameMin> {
+class GameMinMapper : Mapper<GameDb, GameNet, Game> {
 
     // TODO: Implement it
-    override fun fromDb(dbModel: GameMinDb): GameMin {
-        return GameMin(
+    override fun fromDb(dbModel: GameDb): Game {
+        return Game(
             id = dbModel.id,
+            background_image = dbModel.background_image,
             name = dbModel.name,
             released = LocalDateMapper().map(dbModel.released),
             tba = dbModel.tba,
@@ -22,9 +23,10 @@ class GameMinMapper : Mapper<GameMinDb, GameMinNet, GameMin> {
         )
     }
 
-    override fun fromNet(netModel: GameMinNet): GameMin {
-        return GameMin(
+    override fun fromNet(netModel: GameNet): Game {
+        return Game(
             id = netModel.id,
+            background_image = netModel.background_image,
             name = netModel.name,
             released = LocalDateMapper().map(netModel.released),
             tba = netModel.tba,

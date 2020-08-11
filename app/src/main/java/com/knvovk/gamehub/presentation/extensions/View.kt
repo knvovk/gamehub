@@ -10,6 +10,6 @@ fun View.hide() {
     visibility = View.GONE
 }
 
-fun View.showIf(predicate: Boolean) {
-    visibility = if (predicate) View.VISIBLE else View.GONE
+fun View.showIf(predicate: Boolean?) {
+    visibility = if (predicate != null && predicate) View.VISIBLE else View.GONE
 }

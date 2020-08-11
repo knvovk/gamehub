@@ -5,27 +5,30 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.paris.extensions.style
+import com.bumptech.glide.Glide
 import com.knvovk.gamehub.R
 import com.knvovk.gamehub.databinding.ItemNetworkStateBinding
 import com.knvovk.gamehub.databinding.ItemRecyclerGameBinding
-import com.knvovk.gamehub.domain.models.gamemin.GameMin
+import com.knvovk.gamehub.domain.models.gamemin.Game
 import com.knvovk.gamehub.presentation.DATE_FORMAT
 import com.knvovk.gamehub.presentation.NetworkState
+import com.knvovk.gamehub.presentation.extensions.hide
 import com.knvovk.gamehub.presentation.extensions.showIf
 
 class GameAdapter(
     private val retryCallback: () -> Unit
-) : PagedListAdapter<GameMin, RecyclerView.ViewHolder>(diffCallback) {
+) : PagedListAdapter<Game, RecyclerView.ViewHolder>(diffCallback) {
 
     private var state: NetworkState? = null
 
     companion object {
-        private val diffCallback = object : DiffUtil.ItemCallback<GameMin>() {
-            override fun areItemsTheSame(oldItem: GameMin, newItem: GameMin): Boolean {
+        private val diffCallback = object : DiffUtil.ItemCallback<Game>() {
+            override fun areItemsTheSame(oldItem: Game, newItem: Game): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: GameMin, newItem: GameMin): Boolean {
+            override fun areContentsTheSame(oldItem: Game, newItem: Game): Boolean {
                 return oldItem == newItem
             }
         }
@@ -93,10 +96,29 @@ class GameAdapter(
         private val binding: ItemRecyclerGameBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(game: GameMin?) {
+        fun bind(game: Game?) {
             with(binding) {
+                Glide.with(root)
+                    .load(game?.background_image)
+                    .into(imgItemBackground)
                 textItemGameName.text = game?.name
+                when (game?.metacritic) {
+                    in 75..100 -> {
+                        chipMetacritic.style(R.style.App_ChipMetacritic_Good)
+                        chipMetacritic.setChipStrokeColorResource(R.color.colorPastelGreen)
+                    }
+                    in 50..74 -> {
+                        chipMetacritic.style(R.style.App_ChipMetacritic_Average)
+                        chipMetacritic.setChipStrokeColorResource(R.color.colorParisDaisy)
+                    }
+                    in 0..49 -> {
+                        chipMetacritic.style(R.style.App_ChipMetacritic_Bad)
+                        chipMetacritic.setChipStrokeColorResource(R.color.colorCarnation)
+                    }
+                }
+                chipMetacritic.text = game?.metacritic.toString()
                 textItemGameRelease.text = game?.released?.format(DATE_FORMAT)
+                textItemGameReleaseDelimiter.showIf(game?.genres?.isNotEmpty())
                 textItemGameGenres.text = game?.genres?.joinToString { it._name }
                 textItemGamePlatforms.text = game?.platforms?.joinToString { it._name }
             }

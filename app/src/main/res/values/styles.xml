@@ -1,7 +1,25 @@
 <resources>
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="App.ChipMetacritic" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/colorCodGray</item>
+        <item name="chipCornerRadius">6dp</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipStartPadding">2dp</item>
+        <item name="chipEndPadding">4dp</item>
+        <item name="ensureMinTouchTargetSize">false</item>
+        <item name="android:checkable">false</item>
+        <item name="android:clickable">false</item>
+        <item name="android:textAppearance">@style/App.TextAppearance.Caption</item>
+    </style>
+
+    <style name="App.ChipMetacritic.Good">
+        <item name="android:textColor">@color/colorPastelGreen</item>
+    </style>
+
+    <style name="App.ChipMetacritic.Average">
+        <item name="android:textColor">@color/colorParisDaisy</item>
+    </style>
+
+    <style name="App.ChipMetacritic.Bad">
+        <item name="android:textColor">@color/colorCarnation</item>
     </style>
 </resources>

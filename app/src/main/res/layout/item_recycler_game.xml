@@ -1,72 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="0dp"
-    app:cardUseCompatPadding="true"
-    app:cardBackgroundColor="#F2F2F7">
+    app:cardBackgroundColor="@color/colorCodGray"
+    android:elevation="0dp"
+    app:cardCornerRadius="14dp"
+    app:cardUseCompatPadding="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textItemGameName"
-            android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/imgItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="216dp"
+            tools:src="@drawable/item_recycler_bg_img_tools"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/desc_game_bg_img" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            tools:text="The Witcher 3: Wild Hunt" />
+            android:layout_margin="16dp">
 
-        <TextView
-        android:id="@+id/textItemGameRelease"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textItemGameName"
-        android:layout_marginTop="8dp"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-        tools:text="MAY 18, 2015" />
+            <TextView
+                android:id="@+id/textItemGameName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                android:textAppearance="@style/App.TextAppearance.Headline6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/chipMetacritic"
+                tools:text="The Witcher 3: Wild Hunt"
+                android:singleLine="true" />
 
-        <TextView
-            android:id="@+id/textItemGameReleaseDelimiter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/textItemGameRelease"
-            app:layout_constraintTop_toBottomOf="@id/textItemGameName"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-            android:text="•"
-            tools:ignore="HardcodedText" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipMetacritic"
+                style="@style/App.ChipMetacritic.Good"
+                android:layout_width="34dp"
+                android:layout_height="24dp"
+                app:layout_constraintStart_toEndOf="@id/textItemGameName"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="16dp"
+                tools:text="93"
+                android:textAlignment="center" />
 
-        <TextView
-            android:id="@+id/textItemGameGenres"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/textItemGameReleaseDelimiter"
-            app:layout_constraintTop_toBottomOf="@id/textItemGameName"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-            tools:text="Adventure, Action, RPG" />
+            <TextView
+                android:id="@+id/textItemGameRelease"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textItemGameName"
+                app:layout_constraintEnd_toStartOf="@id/textItemGameReleaseDelimiter"
+                tools:text="MAY 18, 2015"
+                android:textAppearance="@style/App.TextAppearance.Caption"/>
 
-        <TextView
-            android:id="@+id/textItemGamePlatforms"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textItemGameGenres"
-            android:layout_marginTop="8dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-            tools:text="PC, PlayStation 4, XBOX ONE, Nintendo Switch" />
+            <TextView
+                android:id="@+id/textItemGameReleaseDelimiter"
+                android:layout_width="4dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/text_delimiter"
+                android:textAppearance="@style/App.TextAppearance.Caption"
+                app:layout_constraintStart_toEndOf="@id/textItemGameRelease"
+                app:layout_constraintTop_toBottomOf="@id/textItemGameName"
+                app:layout_constraintEnd_toStartOf="@id/textItemGameGenres"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textItemGameGenres"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:textAppearance="@style/App.TextAppearance.Caption"
+                app:layout_constraintStart_toEndOf="@id/textItemGameReleaseDelimiter"
+                app:layout_constraintTop_toBottomOf="@id/textItemGameName"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="Adventure, Action, RPG"
+                android:singleLine="true"/>
+
+            <TextView
+                android:id="@+id/textItemGamePlatforms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textAppearance="@style/App.TextAppearance.Caption"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textItemGameGenres"
+                tools:text="PC, PlayStation 4, XBOX ONE, Nintendo Switch"
+                android:singleLine="true"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>
