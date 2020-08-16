@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.paging.Config
 import androidx.paging.PagedList
 import androidx.paging.toLiveData
-import com.knvovk.gamehub.data.api.services.GameService
+import com.knvovk.gamehub.data.services.GameService
 import com.knvovk.gamehub.data.mappers.GamesPageMapper
 import com.knvovk.gamehub.data.repositories.GameDataSource
-import com.knvovk.gamehub.domain.models.gamemin.Game
+import com.knvovk.gamehub.domain.game.Game
 import com.knvovk.gamehub.presentation.NetworkState
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 
@@ -56,9 +56,5 @@ class GamesViewModel : ViewModel() {
 
     fun retry() {
         factory.liveData.value!!.retry()
-    }
-
-    fun refresh() {
-        factory.liveData.value!!.invalidate()
     }
 }

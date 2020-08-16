@@ -1,17 +1,9 @@
 package com.knvovk.gamehub.data.mappers
 
-import com.knvovk.gamehub.domain.models.platform.Platform
-import com.knvovk.gamehub.domain.models.platform.PlatformDb
-import com.knvovk.gamehub.domain.models.platform.PlatformNet
+import com.knvovk.gamehub.domain.platform.Platform
+import com.knvovk.gamehub.domain.platform.PlatformDetailsResponse
 
-class PlatformMapper : Mapper<PlatformDb, PlatformNet, Platform> {
+class PlatformMapper : Mapper<PlatformDetailsResponse, Platform> {
 
-    // TODO: Implement it
-    override fun fromDb(dbModel: PlatformDb): Platform {
-        return Platform.of(dbModel.id)
-    }
-
-    override fun fromNet(netModel: PlatformNet): Platform {
-        return Platform.of(netModel.id)
-    }
+    override fun map(response: PlatformDetailsResponse) = Platform.of(response.platform.id)
 }

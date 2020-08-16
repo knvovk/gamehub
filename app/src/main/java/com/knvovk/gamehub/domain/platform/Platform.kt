@@ -1,4 +1,4 @@
-package com.knvovk.gamehub.domain.models.platform
+package com.knvovk.gamehub.domain.platform
 
 enum class Platform(val id: Int, val _name: String) {
     XBOX_ONE(id = 1, _name = "Xbox One"),

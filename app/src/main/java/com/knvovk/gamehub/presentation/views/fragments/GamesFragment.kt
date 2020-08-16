@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
 import com.knvovk.gamehub.databinding.FragmentGamesBinding
-import com.knvovk.gamehub.domain.models.gamemin.Game
+import com.knvovk.gamehub.domain.game.Game
 import com.knvovk.gamehub.presentation.NetworkState
 import com.knvovk.gamehub.presentation.adapters.GameAdapter
 import com.knvovk.gamehub.presentation.extensions.showIf
@@ -66,13 +66,12 @@ class GamesFragment : Fragment() {
     }
 
     private fun setInitialLoadState(state: NetworkState?) {
-        with(binding!!) {
-            with(itemNetworkState) {
-                buttonRetryLoading.setOnClickListener { viewModel.retry() }
-                buttonRetryLoading.showIf(state == NetworkState.FAILURE)
-                textErrorLoading.showIf(state == NetworkState.FAILURE)
-                progressBarLoading.showIf(state == NetworkState.LOADING)
-            }
+        with(binding!!.networkState) {
+            buttonRetry.setOnClickListener { viewModel.retry() }
+            buttonRetry.showIf(state === NetworkState.Failure)
+            textError.showIf(state === NetworkState.Failure)
+            textErrorHelp.showIf(state === NetworkState.Failure)
+            progressBar.showIf(state === NetworkState.Loading)
         }
     }
 }

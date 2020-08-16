@@ -1,17 +1,9 @@
 package com.knvovk.gamehub.data.mappers
 
-import com.knvovk.gamehub.domain.models.genre.Genre
-import com.knvovk.gamehub.domain.models.genre.GenreDb
-import com.knvovk.gamehub.domain.models.genre.GenreNet
+import com.knvovk.gamehub.domain.genre.Genre
+import com.knvovk.gamehub.domain.genre.GenreResponse
 
-class GenreMapper : Mapper<GenreDb, GenreNet, Genre> {
+class GenreMapper : Mapper<GenreResponse, Genre> {
 
-    // TODO: Implement it
-    override fun fromDb(dbModel: GenreDb): Genre {
-        return Genre.of(id = dbModel.id)
-    }
-
-    override fun fromNet(netModel: GenreNet): Genre {
-        return Genre.of(id = netModel.id)
-    }
+    override fun map(response: GenreResponse) = Genre.of(id = response.id)
 }

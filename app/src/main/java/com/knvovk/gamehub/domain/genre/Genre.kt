@@ -1,4 +1,4 @@
-package com.knvovk.gamehub.domain.models.genre
+package com.knvovk.gamehub.domain.genre
 
 enum class Genre(val id: Int, val _name: String) {
     RACING(id = 1, _name = "Гонки"),

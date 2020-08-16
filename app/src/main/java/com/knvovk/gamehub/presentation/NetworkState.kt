@@ -1,7 +1,7 @@
 package com.knvovk.gamehub.presentation
 
-enum class NetworkState {
-    SUCCESS,
-    LOADING,
-    FAILURE
+sealed class NetworkState {
+    object Loading : NetworkState()
+    object Success : NetworkState()
+    object Failure : NetworkState()
 }

@@ -2,18 +2,17 @@ package com.knvovk.gamehub.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.airbnb.paris.extensions.style
 import com.bumptech.glide.Glide
 import com.knvovk.gamehub.R
 import com.knvovk.gamehub.databinding.ItemNetworkStateBinding
 import com.knvovk.gamehub.databinding.ItemRecyclerGameBinding
-import com.knvovk.gamehub.domain.models.gamemin.Game
+import com.knvovk.gamehub.domain.game.Game
 import com.knvovk.gamehub.presentation.DATE_FORMAT
 import com.knvovk.gamehub.presentation.NetworkState
-import com.knvovk.gamehub.presentation.extensions.hide
 import com.knvovk.gamehub.presentation.extensions.showIf
 
 class GameAdapter(
@@ -36,12 +35,12 @@ class GameAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val itemRecyclerGameBinding = ItemRecyclerGameBinding.inflate(inflater, parent, false)
-        val itemNetworkStateBinding = ItemNetworkStateBinding.inflate(inflater, parent, false)
+        val gameBinding = ItemRecyclerGameBinding.inflate(inflater, parent, false)
+        val networkBinding = ItemNetworkStateBinding.inflate(inflater, parent, false)
         return when (viewType) {
-            R.layout.item_recycler_game -> GameViewHolder(itemRecyclerGameBinding)
+            R.layout.item_recycler_game -> GameViewHolder(gameBinding)
             R.layout.item_network_state -> NetworkStateViewHolder(
-                itemNetworkStateBinding,
+                networkBinding,
                 retryCallback
             )
             else -> throw IllegalArgumentException("Unknown View Type")
@@ -69,10 +68,10 @@ class GameAdapter(
     }
 
     private fun hasExtraRow(): Boolean {
-        return state != null && state != NetworkState.SUCCESS
+        return state != null && state !== NetworkState.Success
     }
 
-    fun setNetworkState(state: NetworkState?) {
+    fun setNetworkState(state: NetworkState) {
         if (currentList != null) {
             if (currentList!!.size != 0) {
                 val prevState = this.state
@@ -97,30 +96,26 @@ class GameAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(game: Game?) {
-            with(binding) {
-                Glide.with(root)
-                    .load(game?.background_image)
-                    .into(imgItemBackground)
-                textItemGameName.text = game?.name
-                when (game?.metacritic) {
-                    in 75..100 -> {
-                        chipMetacritic.style(R.style.App_ChipMetacritic_Good)
-                        chipMetacritic.setChipStrokeColorResource(R.color.colorPastelGreen)
+            game?.let {
+                with(binding) {
+                    Glide.with(root)
+                        .load(game.image)
+                        .into(imageBackground)
+                    textName.text = game.name
+                    var metaColor = 0
+                    when (game.metacritic) {
+                        in 75..100 -> metaColor = R.color.colorPastelGreen
+                        in 50..74 -> metaColor = R.color.colorParisDaisy
+                        in 0..49 -> metaColor = R.color.colorCarnation
                     }
-                    in 50..74 -> {
-                        chipMetacritic.style(R.style.App_ChipMetacritic_Average)
-                        chipMetacritic.setChipStrokeColorResource(R.color.colorParisDaisy)
-                    }
-                    in 0..49 -> {
-                        chipMetacritic.style(R.style.App_ChipMetacritic_Bad)
-                        chipMetacritic.setChipStrokeColorResource(R.color.colorCarnation)
-                    }
+                    chipMetacritic.setChipStrokeColorResource(metaColor)
+                    chipMetacritic.setTextColor(ContextCompat.getColor(root.context, metaColor))
+                    chipMetacritic.text = game.metacritic.toString()
+                    textRelease.text = game.released.format(DATE_FORMAT)
+                    textReleaseDelimiter.showIf(game.genres.isNotEmpty())
+                    textGenres.text = game.genres.joinToString { it._name }
+                    textPlatforms.text = game.platforms.joinToString { it._name }
                 }
-                chipMetacritic.text = game?.metacritic.toString()
-                textItemGameRelease.text = game?.released?.format(DATE_FORMAT)
-                textItemGameReleaseDelimiter.showIf(game?.genres?.isNotEmpty())
-                textItemGameGenres.text = game?.genres?.joinToString { it._name }
-                textItemGamePlatforms.text = game?.platforms?.joinToString { it._name }
             }
         }
     }
@@ -131,14 +126,15 @@ class GameAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
-            binding.buttonRetryLoading.setOnClickListener { retryCallback() }
+            binding.buttonRetry.setOnClickListener { retryCallback() }
         }
 
         fun bind(state: NetworkState?) {
             with(binding) {
-                textErrorLoading.showIf(state == NetworkState.FAILURE)
-                buttonRetryLoading.showIf(state == NetworkState.FAILURE)
-                progressBarLoading.showIf(state == NetworkState.LOADING)
+                textError.showIf(state === NetworkState.Failure)
+                textErrorHelp.showIf(state === NetworkState.Failure)
+                buttonRetry.showIf(state === NetworkState.Failure)
+                progressBar.showIf(state === NetworkState.Loading)
             }
         }
     }

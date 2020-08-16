@@ -1,6 +1,6 @@
-package com.knvovk.gamehub.data.api.services
+package com.knvovk.gamehub.data.services
 
-import com.knvovk.gamehub.domain.models.gamespage.GamesPageNet
+import com.knvovk.gamehub.domain.gamespage.GamesPageResponse
 import io.reactivex.rxjava3.core.Observable
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -15,12 +15,12 @@ import retrofit2.http.Query
 interface GameService {
 
     @GET("games")
-    fun getGamesByDate(
+    fun getNewTrendingGames(
         @Query("dates") release: String,
         @Query("ordering") ordering: String = "-rating",
         @Query("page") page: Int,
         @Query("page_size") pageSize: Int
-    ): Observable<GamesPageNet>
+    ): Observable<GamesPageResponse>
 
     companion object {
         private const val BASE_URL = "https://api.rawg.io/api/"

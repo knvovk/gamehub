@@ -1,8 +1,6 @@
 package com.knvovk.gamehub.data.mappers
 
-interface Mapper<D, N, M> {
+interface Mapper<R, M> {
 
-    fun fromNet(netModel: N): M
-
-    fun fromDb(dbModel: D): M
+    fun map(response: R): M
 }

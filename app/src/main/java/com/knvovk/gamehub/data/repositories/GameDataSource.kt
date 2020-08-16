@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import androidx.paging.PageKeyedDataSource
-import com.knvovk.gamehub.data.api.services.GameService
+import com.knvovk.gamehub.data.services.GameService
 import com.knvovk.gamehub.data.mappers.GamesPageMapper
-import com.knvovk.gamehub.domain.models.gamemin.Game
+import com.knvovk.gamehub.domain.game.Game
 import com.knvovk.gamehub.presentation.NetworkState
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
@@ -34,7 +34,7 @@ class GameDataSource(
         get() = _initialLoadState
 
     companion object {
-        private const val TAG = "GameMinDataSource"
+        private const val TAG = "GameDataSource"
         private val year = LocalDate.now().year
         private val date = "$year-01-01,$year-12-31"
         private const val page1 = 1
@@ -45,41 +45,41 @@ class GameDataSource(
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, Game>
     ) {
-        _initialLoadState.postValue(NetworkState.LOADING)
-        _networkState.postValue(NetworkState.LOADING)
-        service.getGamesByDate(
+        _initialLoadState.postValue(NetworkState.Loading)
+        _networkState.postValue(NetworkState.Loading)
+        service.getNewTrendingGames(
             release = date,
             pageSize = params.requestedLoadSize,
             page = page1
-        ).map { mapper.fromNet(it).games }
+        ).map { mapper.map(it).list }
             .subscribeBy(onNext = {
                 retry = null
-                _initialLoadState.postValue(NetworkState.SUCCESS)
-                _networkState.postValue(NetworkState.SUCCESS)
+                _initialLoadState.postValue(NetworkState.Success)
+                _networkState.postValue(NetworkState.Success)
                 callback.onResult(it, null, page2)
             }, onError = {
                 retry = Completable.fromAction { loadInitial(params, callback) }
-                _initialLoadState.postValue(NetworkState.FAILURE)
-                _networkState.postValue(NetworkState.FAILURE)
+                _initialLoadState.postValue(NetworkState.Failure)
+                _networkState.postValue(NetworkState.Failure)
                 Log.e(TAG, "loadInitial: ${it.message}", it)
             })
             .addTo(disposables)
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Game>) {
-        _networkState.postValue(NetworkState.LOADING)
-        service.getGamesByDate(
+        _networkState.postValue(NetworkState.Loading)
+        service.getNewTrendingGames(
             release = date,
             pageSize = params.requestedLoadSize,
             page = params.key
-        ).map { mapper.fromNet(it).games }
+        ).map { mapper.map(it).list }
             .subscribeBy(onNext = {
                 retry = null
-                _networkState.postValue(NetworkState.SUCCESS)
+                _networkState.postValue(NetworkState.Success)
                 callback.onResult(it, params.key + 1)
             }, onError = {
                 retry = Completable.fromAction { loadAfter(params, callback) }
-                _networkState.postValue(NetworkState.FAILURE)
+                _networkState.postValue(NetworkState.Failure)
                 Log.e(TAG, "loadAfter: ${it.message}", it)
             })
             .addTo(disposables)
@@ -91,9 +91,7 @@ class GameDataSource(
         if (retry != null) {
             retry!!.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(onComplete = {
-                    // OK
-                }, onError = {
+                .subscribeBy(onError = {
                     Log.e(TAG, "retry: ${it.message}", it)
                 })
                 .addTo(disposables)
