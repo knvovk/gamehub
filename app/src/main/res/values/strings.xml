@@ -2,9 +2,12 @@
     <string name="app_name">GameHub</string>
     <string name="games_fragment_main_text">Games Fragment</string>
 
-    <string name="err_something_went_wrong">Что-то пошло не так… \nПопробуйте обновить страницу.</string>
+    <string name="err_no_internet_connection">Нет подключения к Интернету</string>
+    <string name="err_no_internet_connection_help">
+        Когда соединение будет\nвосстановлено, попробуйте\nобновить страницу
+    </string>
 
-    <string name="button_retry_loading">Обновить</string>
+    <string name="button_retry_loading">Повторить</string>
     <string name="desc_game_bg_img">Game background image</string>
 
     <string name="text_delimiter">•</string>

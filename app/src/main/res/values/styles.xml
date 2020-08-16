@@ -9,17 +9,6 @@
         <item name="android:checkable">false</item>
         <item name="android:clickable">false</item>
         <item name="android:textAppearance">@style/App.TextAppearance.Caption</item>
-    </style>
-
-    <style name="App.ChipMetacritic.Good">
-        <item name="android:textColor">@color/colorPastelGreen</item>
-    </style>
-
-    <style name="App.ChipMetacritic.Average">
-        <item name="android:textColor">@color/colorParisDaisy</item>
-    </style>
-
-    <style name="App.ChipMetacritic.Bad">
-        <item name="android:textColor">@color/colorCarnation</item>
+        <item name="android:textAlignment">center</item>
     </style>
 </resources>

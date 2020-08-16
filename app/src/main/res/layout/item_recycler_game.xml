@@ -16,12 +16,12 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/imgItemBackground"
+            android:id="@+id/imageBackground"
             android:layout_width="match_parent"
             android:layout_height="216dp"
-            tools:src="@drawable/item_recycler_bg_img_tools"
             android:scaleType="centerCrop"
-            android:contentDescription="@string/desc_game_bg_img" />
+            android:contentDescription="@string/desc_game_bg_img"
+            tools:src="@drawable/item_recycler_bg_img_tools" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -29,75 +29,76 @@
             android:layout_margin="16dp">
 
             <TextView
-                android:id="@+id/textItemGameName"
+                android:id="@+id/textName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
-                android:textAppearance="@style/App.TextAppearance.Headline6"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/chipMetacritic"
-                tools:text="The Witcher 3: Wild Hunt"
-                android:singleLine="true" />
+                android:textAppearance="@style/App.TextAppearance.Headline6"
+                android:singleLine="true"
+                tools:text="The Witcher 3: Wild Hunt" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipMetacritic"
-                style="@style/App.ChipMetacritic.Good"
+                style="@style/App.ChipMetacritic"
                 android:layout_width="34dp"
                 android:layout_height="24dp"
-                app:layout_constraintStart_toEndOf="@id/textItemGameName"
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toEndOf="@id/textName"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginStart="16dp"
-                tools:text="93"
-                android:textAlignment="center" />
+                tools:chipStrokeColor="@color/colorPastelGreen"
+                tools:textColor="@color/colorPastelGreen"
+                tools:text="93"/>
 
             <TextView
-                android:id="@+id/textItemGameRelease"
+                android:id="@+id/textRelease"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textItemGameName"
-                app:layout_constraintEnd_toStartOf="@id/textItemGameReleaseDelimiter"
-                tools:text="MAY 18, 2015"
-                android:textAppearance="@style/App.TextAppearance.Caption"/>
+                app:layout_constraintTop_toBottomOf="@id/textName"
+                app:layout_constraintEnd_toStartOf="@id/textReleaseDelimiter"
+                android:textAppearance="@style/App.TextAppearance.Caption"
+                tools:text="18 мая 2015" />
 
             <TextView
-                android:id="@+id/textItemGameReleaseDelimiter"
+                android:id="@+id/textReleaseDelimiter"
                 android:layout_width="4dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@id/textRelease"
+                app:layout_constraintTop_toBottomOf="@id/textName"
+                app:layout_constraintEnd_toStartOf="@id/textGenres"
                 android:text="@string/text_delimiter"
-                android:textAppearance="@style/App.TextAppearance.Caption"
-                app:layout_constraintStart_toEndOf="@id/textItemGameRelease"
-                app:layout_constraintTop_toBottomOf="@id/textItemGameName"
-                app:layout_constraintEnd_toStartOf="@id/textItemGameGenres"/>
+                android:textAppearance="@style/App.TextAppearance.Caption" />
 
             <TextView
-                android:id="@+id/textItemGameGenres"
+                android:id="@+id/textGenres"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
-                android:textAppearance="@style/App.TextAppearance.Caption"
-                app:layout_constraintStart_toEndOf="@id/textItemGameReleaseDelimiter"
-                app:layout_constraintTop_toBottomOf="@id/textItemGameName"
+                app:layout_constraintStart_toEndOf="@id/textReleaseDelimiter"
+                app:layout_constraintTop_toBottomOf="@id/textName"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:text="Adventure, Action, RPG"
-                android:singleLine="true"/>
+                android:textAppearance="@style/App.TextAppearance.Caption"
+                android:singleLine="true"
+                tools:text="Приключения, Экшен, Ролевая" />
 
             <TextView
-                android:id="@+id/textItemGamePlatforms"
+                android:id="@+id/textPlatforms"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textAppearance="@style/App.TextAppearance.Caption"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textItemGameGenres"
-                tools:text="PC, PlayStation 4, XBOX ONE, Nintendo Switch"
-                android:singleLine="true"/>
+                app:layout_constraintTop_toBottomOf="@id/textGenres"
+                android:textAppearance="@style/App.TextAppearance.Caption"
+                android:singleLine="true"
+                tools:text="PC, PlayStation 4, XBOX ONE, Nintendo Switch" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

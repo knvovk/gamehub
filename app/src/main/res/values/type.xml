@@ -12,4 +12,8 @@
         parent="@style/TextAppearance.MaterialComponents.Caption">
         <item name="android:textColor">@color/colorTextSecondary</item>
     </style>
+
+    <style name="App.TextAppearance.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/colorTextSecondary</item>
+    </style>
 </resources>
