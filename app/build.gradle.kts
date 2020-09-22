@@ -15,7 +15,7 @@ android {
     defaultConfig {
         applicationId = "com.knvovk.gamehub"
 
-        minSdkVersion(21)
+        minSdkVersion(23)
         targetSdkVersion(30)
 
         versionCode = 1
@@ -24,6 +24,8 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled = true
+
+        vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes {
@@ -56,22 +58,22 @@ dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
     // Java 8 library desugaring in D8 and R8
-    val desugarVersion = "1.0.9"
+    val desugarVersion = "1.0.10"
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:$desugarVersion")
 
     // Kotlin
-    val kotlinVersion = "1.3.72"
+    val kotlinVersion = "1.4.0"
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
 
     // AppCompat & Constraint
-    val appCompatVersion = "1.1.0"
-    val constraintVersion = "1.1.3"
+    val appCompatVersion = "1.2.0"
+    val constraintVersion = "2.0.1"
     implementation("androidx.appcompat:appcompat:$appCompatVersion")
     implementation("androidx.constraintlayout:constraintlayout:$constraintVersion")
 
     // RecyclerView
     val recyclerVersion = "1.1.0"
-    val recyclerSelectionVersion = "1.1.0-rc01"
+    val recyclerSelectionVersion = "1.1.0-rc02"
     implementation("androidx.recyclerview:recyclerview:$recyclerVersion")
     implementation("androidx.recyclerview:recyclerview-selection:$recyclerSelectionVersion")
 
@@ -80,7 +82,7 @@ dependencies {
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:$swipeVersion")
 
     // MDC
-    val materialVersion = "1.1.0"
+    val materialVersion = "1.2.1"
     implementation("com.google.android.material:material:$materialVersion")
 
     // CardView
@@ -92,7 +94,7 @@ dependencies {
     implementation("com.airbnb.android:paris:$parisVersion")
 
     // Android KTX
-    val coreKtxVersion = "1.3.0"
+    val coreKtxVersion = "1.3.1"
     val fragmentKtxVersion = "1.2.5"
     implementation("androidx.core:core-ktx:$coreKtxVersion")
     implementation("androidx.fragment:fragment-ktx:$fragmentKtxVersion")
@@ -119,7 +121,7 @@ dependencies {
     implementation("com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion")
 
     // OkHttp
-    val okHttpVersion = "4.8.0"
+    val okHttpVersion = "4.8.1"
     implementation("com.squareup.okhttp3:okhttp:$okHttpVersion")
     implementation("com.squareup.okhttp3:logging-interceptor:$okHttpVersion")
 
@@ -136,6 +138,6 @@ dependencies {
 
     // Tests
     testImplementation("junit:junit:4.13")
-    androidTestImplementation("androidx.test.ext:junit:1.1.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
+    androidTestImplementation("androidx.test.ext:junit:1.1.2")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 }

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/colorCodGray"
+    android:elevation="0dp"
+    app:cardCornerRadius="14dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageBackground"
+            android:layout_width="match_parent"
+            android:layout_height="216dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/desc_game_poster"
+            tools:src="@drawable/item_recycler_bg_img_stub" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
+
+            <TextView
+                android:id="@+id/textName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/chipMetacritic"
+                android:textAppearance="@style/App.TextAppearance.H6"
+                android:singleLine="true"
+                tools:text="The Witcher 3: Wild Hunt" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipMetacritic"
+                style="@style/App.Chip.Metacritic"
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toEndOf="@id/textName"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:chipStrokeColor="@color/colorPastelGreen"
+                tools:textColor="@color/colorPastelGreen"
+                tools:text="93"/>
+
+            <TextView
+                android:id="@+id/textRelease"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textName"
+                app:layout_constraintEnd_toStartOf="@id/textReleaseDelimiter"
+                android:textAppearance="@style/App.TextAppearance.C"
+                tools:text="18 мая 2015" />
+
+            <TextView
+                android:id="@+id/textReleaseDelimiter"
+                android:layout_width="4dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@id/textRelease"
+                app:layout_constraintTop_toBottomOf="@id/textName"
+                app:layout_constraintEnd_toStartOf="@id/textGenres"
+                android:text="@string/text_delimiter"
+                android:textAppearance="@style/App.TextAppearance.C" />
+
+            <TextView
+                android:id="@+id/textGenres"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@id/textReleaseDelimiter"
+                app:layout_constraintTop_toBottomOf="@id/textName"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textAppearance="@style/App.TextAppearance.C"
+                android:singleLine="true"
+                tools:text="Приключения, Экшен, Ролевая" />
+
+            <TextView
+                android:id="@+id/textPlatforms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textGenres"
+                android:textAppearance="@style/App.TextAppearance.C"
+                android:singleLine="true"
+                tools:text="PC, PlayStation 4, XBOX ONE, Nintendo Switch" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
