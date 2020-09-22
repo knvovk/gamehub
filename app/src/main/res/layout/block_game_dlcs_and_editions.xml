@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:layout_margin="16dp"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <TextView
+        style="@style/App.TextView.Header"
+        android:id="@+id/headerDlcsAndEditions"
+        android:text="@string/header_dlcs_and_editions"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hViewVideos"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerDlcsAndEditions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:overScrollMode="never"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerDlcsAndEditions"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+</merge>

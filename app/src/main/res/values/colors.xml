@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--  Theme's colors  -->
     <color name="colorPrimary">#B79EF8</color>
     <color name="colorPrimaryVariant">#7C55F5</color>
-    <color name="colorSecondary">#ffe28e</color>
+    <color name="colorSecondary">#FFE28E</color>
     <color name="colorSecondaryVariant">#FF952A</color>
-
     <color name="colorOnPrimary">#000000</color>
     <color name="colorOnSecondary">#000000</color>
     <color name="colorOnBackground">#FFFFFF</color>
     <color name="colorOnSurface">#FFFFFF</color>
     <color name="colorOnError">#000000</color>
-
     <color name="colorBackground">#000000</color>
     <color name="colorSurface">#000000</color>
     <color name="colorError">#FF453A</color>
+    <!--  Theme's colors  -->
 
+    <!--  Text colors  -->
     <color name="colorTextPrimary">#DEFFFFFF</color>
     <color name="colorTextSecondary">#99FFFFFF</color>
+    <!--  Text colors  -->
 
-    <color name="colorCodGray">#121212</color>
-    <color name="separatorColor">#38383A</color>
+    <!--  Views colors  -->
+    <color name="colorSeparator">#38383A</color>
+    <color name="colorOverlayVideo">#33000000</color>
+    <color name="colorOverlayScreenshot">#CC000000</color>
+    <!--  Views colors  -->
 
-    <color name="colorPastelGreen">#68E070</color>
-    <color name="colorParisDaisy">#FFF068</color>
-    <color name="colorCarnation">#F85454</color>
+    <!--  Other colors  -->
+    <color name="colorDarkGray">#121212</color>
+    <color name="colorGreen">#68E070</color>
+    <color name="colorYellow">#FFF068</color>
+    <color name="colorRed">#F85454</color>
+    <!--  Other colors  -->
 </resources>

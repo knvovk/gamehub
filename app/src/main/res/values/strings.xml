@@ -1,14 +1,61 @@
 <resources>
+    <!--  Common  -->
     <string name="app_name">GameHub</string>
-    <string name="games_fragment_main_text">Games Fragment</string>
-
-    <string name="err_no_internet_connection">Нет подключения к Интернету</string>
-    <string name="err_no_internet_connection_help">
-        Когда соединение будет\nвосстановлено, попробуйте\nобновить страницу
-    </string>
-
-    <string name="button_retry_loading">Повторить</string>
-    <string name="desc_game_bg_img">Game background image</string>
-
     <string name="text_delimiter">•</string>
+    <!--  Common  -->
+
+    <!--  Buttons  -->
+    <string name="button_retry_loading">RETRY</string>
+    <string name="button_view_all">VIEW ALL</string>
+    <!--  Buttons  -->
+
+    <!--  Chips  -->
+    <string name="text_gog">GOG</string>
+    <string name="text_steam">Steam</string>
+    <string name="text_xbox_store">Xbox Store</string>
+    <string name="text_playstation_store">PlayStation Store</string>
+    <!--  Chips  -->
+
+    <!--  Errors  -->
+    <string name="err_no_internet_connection">
+        No internet connection.\n
+        Make sure that Wi-Fi or mobile data\n
+        is turned on, then try again.
+    </string>
+    <!--  Errors  -->
+
+    <!--  Headers  -->
+    <string name="header_about_game">ABOUT</string>
+    <string name="header_info">INFORMATION</string>
+    <string name="header_where_to_buy">WHERE TO BUY</string>
+    <string name="header_screenshots">SCREENSHOTS</string>
+    <string name="header_videos">VIDEOS</string>
+    <string name="header_dlcs_and_editions">DLC\'S AND EDITIONS</string>
+    <!--  Headers  -->
+
+    <!--  ImageView Descriptions  -->
+    <string name="desc_game_bg_img">Game background image</string>
+    <string name="desc_game_poster">Game Poster</string>
+    <string name="desc_game_screenshot">Game Screenshot</string>
+    <string name="desc_game_video">Game Video</string>
+    <string name="desc_game_play_video">Play Video</string>
+    <!--  ImageView Descriptions  -->
+
+    <!--  Titles  -->
+    <string name="title_release_date">Release date</string>
+    <string name="title_metascore">Metascore</string>
+    <string name="title_platforms">Platforms</string>
+    <string name="title_genres">Genres</string>
+    <string name="title_developer">Developer</string>
+    <string name="title_publisher">Publisher</string>
+    <string name="title_website">Website</string>
+    <string name="title_esrb_rating">Age Rating</string>
+    <string name="title_last_modified">Last modified</string>
+    <string name="title_playtime">Average playtime</string>
+    <string name="title_tags">Tags</string>
+    <!--  Titles  -->
+
+    <!--  Tools  -->
+    <string name="tools_title_toolbar_game_details">The Witcher 3: Wild Hunt</string>
+    <!--  Tools  -->
 </resources>

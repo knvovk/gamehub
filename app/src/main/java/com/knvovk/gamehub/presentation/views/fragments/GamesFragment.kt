@@ -14,10 +14,12 @@ import com.knvovk.gamehub.presentation.NetworkState
 import com.knvovk.gamehub.presentation.adapters.GameAdapter
 import com.knvovk.gamehub.presentation.extensions.showIf
 import com.knvovk.gamehub.presentation.viewmodels.GamesViewModel
+import com.knvovk.gamehub.presentation.views.activities.MainActivity
 
 class GamesFragment : Fragment() {
 
-    private var binding: FragmentGamesBinding? = null
+    private var _binding: FragmentGamesBinding? = null
+    private lateinit var binding: FragmentGamesBinding
     private lateinit var adapter: GameAdapter
     private val viewModel by viewModels<GamesViewModel>()
 
@@ -26,8 +28,9 @@ class GamesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentGamesBinding.inflate(inflater, container, false)
-        return binding!!.root
+        _binding = FragmentGamesBinding.inflate(inflater, container, false)
+        binding = _binding!!
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,12 +40,12 @@ class GamesFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        binding = null
+        _binding = null
     }
 
     private fun initRecyclerView() {
         adapter = GameAdapter(viewModel::retry)
-        binding!!.recyclerGames.adapter = adapter
+        binding.recyclerGames.adapter = adapter
         viewModel.data.observe(
             viewLifecycleOwner,
             Observer<PagedList<Game>>(adapter::submitList)
@@ -66,11 +69,10 @@ class GamesFragment : Fragment() {
     }
 
     private fun setInitialLoadState(state: NetworkState?) {
-        with(binding!!.networkState) {
+        with(binding.networkState) {
             buttonRetry.setOnClickListener { viewModel.retry() }
-            buttonRetry.showIf(state === NetworkState.Failure)
             textError.showIf(state === NetworkState.Failure)
-            textErrorHelp.showIf(state === NetworkState.Failure)
+            buttonRetry.showIf(state === NetworkState.Failure)
             progressBar.showIf(state === NetworkState.Loading)
         }
     }

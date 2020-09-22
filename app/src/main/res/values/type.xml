@@ -1,19 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style
-        name="App.TextAppearance.Headline6"
-        parent="@style/TextAppearance.MaterialComponents.Headline6">
+    <style name="App.TextAppearance.Headline4" parent="@style/TextAppearance.MaterialComponents.Headline4">
         <item name="android:textColor">@color/colorTextPrimary</item>
     </style>
 
-    <style
-        name="App.TextAppearance.Caption"
-        parent="@style/TextAppearance.MaterialComponents.Caption">
+    <style name="App.TextAppearance.Headline6" parent="@style/TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/colorTextPrimary</item>
+    </style>
+
+    <style name="App.TextAppearance.Headline7" parent="@style/TextAppearance.MaterialComponents.Button">
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="App.TextAppearance.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
         <item name="android:textColor">@color/colorTextSecondary</item>
     </style>
 
     <style name="App.TextAppearance.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="lineHeight">22dp</item>
+    </style>
+
+    <style name="App.TextAppearance.Body2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="lineHeight">20dp</item>
+    </style>
+
+    <style name="App.TextAppearance.Caption" parent="@style/TextAppearance.MaterialComponents.Caption">
         <item name="android:textColor">@color/colorTextSecondary</item>
+    </style>
+
+    <style name="App.TextAppearance.Caption.Bold">
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>

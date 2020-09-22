@@ -10,6 +10,12 @@
         android:id="@+id/gamesFragment"
         android:name="com.knvovk.gamehub.presentation.views.fragments.GamesFragment"
         android:label="fragment_games"
-        tools:layout="@layout/fragment_games" />
+        tools:layout="@layout/fragment_games"/>
+
+    <fragment
+        android:id="@+id/gameDetailsFragment"
+        android:name="com.knvovk.gamehub.presentation.views.fragments.GameDetailsFragment"
+        android:label="fragment_game_details"
+        tools:layout="@layout/fragment_game_details"/>
 
 </navigation>

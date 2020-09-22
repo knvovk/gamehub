@@ -1,14 +1,131 @@
 <resources>
-    <style name="App.ChipMetacritic" parent="Widget.MaterialComponents.Chip.Choice">
-        <item name="chipBackgroundColor">@color/colorCodGray</item>
+    <!--  Base  -->
+    <style name="App"/>
+    <!--  Base  -->
+
+    <!--  Buttons  -->
+    <style name="App.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <!--  Buttons  -->
+
+    <!--  CardViews  -->
+    <style name="App.CardView" parent="Widget.MaterialComponents.CardView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="elevation">0dp</item>
+        <item name="cardCornerRadius">12dp</item>
+    </style>
+
+    <style name="App.CardView.ImageCard"/>
+
+    <style name="App.CardView.GameCard">
+        <item name="android:layout_width">match_parent</item>
+        <item name="useCompatPadding">true</item>
+        <item name="cardBackgroundColor">@color/colorDarkGray</item>
+    </style>
+    <!--  CardViews  -->
+
+    <!--  Chips  -->
+    <style name="App.Chip" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="ensureMinTouchTargetSize">false</item>
+    </style>
+
+    <style name="App.Chip.Metacritic">
+        <item name="chipBackgroundColor">@android:color/transparent</item>
         <item name="chipCornerRadius">6dp</item>
         <item name="chipStrokeWidth">1dp</item>
         <item name="chipStartPadding">2dp</item>
         <item name="chipEndPadding">4dp</item>
-        <item name="ensureMinTouchTargetSize">false</item>
+        <item name="android:layout_width">34dp</item>
+        <item name="android:layout_height">24dp</item>
         <item name="android:checkable">false</item>
         <item name="android:clickable">false</item>
-        <item name="android:textAppearance">@style/App.TextAppearance.Caption</item>
         <item name="android:textAlignment">center</item>
+        <item name="android:textAppearance">@style/App.TextAppearance.Caption.Bold</item>
     </style>
+
+    <style name="App.Chip.Store">
+
+    </style>
+    <!--  Chips  -->
+
+    <!--  ImageViews  -->
+    <style name="App.ImageView">
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="App.ImageView.Screenshot">
+        <item name="android:layout_width">256dp</item>
+    </style>
+
+    <style name="App.ImageView.Screenshot.Overlay">
+        <item name="android:foreground">@color/colorOverlayScreenshot</item>
+    </style>
+
+    <style name="App.ImageView.Video">
+        <item name="android:layout_width">256dp</item>
+        <item name="android:foreground">@color/colorOverlayVideo</item>
+    </style>
+
+    <style name="App.ImageView.Video.Overlay">
+        <item name="android:foreground">@color/colorOverlayScreenshot</item>
+    </style>
+
+    <style name="App.ImageView.Icon">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+    </style>
+
+    <style name="App.ImageView.Icon.Play">
+        <item name="android:layout_gravity">center</item>
+    </style>
+    <!--  ImageViews  -->
+
+    <!--  HorizontalScrollView  -->
+    <style name="App.HorizontalScrollView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:overScrollMode">never</item>
+    </style>
+    <!--  HorizontalScrollView  -->
+
+    <!--  TextViews  -->
+    <style name="App.TextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="App.TextView.Header">
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:textAppearance">@style/App.TextAppearance.Headline7</item>
+    </style>
+
+    <style name="App.TextView.Body1">
+        <item name="android:textAppearance">@style/App.TextAppearance.Body1</item>
+    </style>
+
+    <style name="App.TextView.Body2">
+        <item name="android:textAppearance">@style/App.TextAppearance.Body2</item>
+    </style>
+
+    <style name="App.TextView.Subtitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textAppearance">@style/App.TextAppearance.Subtitle2</item>
+    </style>
+    <!--  TextViews  -->
+
+    <!--  Toolbar  -->
+    <style name="App.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="elevation">0dp</item>
+    </style>
+    <!--  Toolbar  -->
 </resources>

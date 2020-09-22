@@ -1,19 +1,22 @@
 package com.knvovk.gamehub.presentation.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.core.content.ContextCompat
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.knvovk.gamehub.R
-import com.knvovk.gamehub.databinding.ItemNetworkStateBinding
-import com.knvovk.gamehub.databinding.ItemRecyclerGameBinding
+import com.knvovk.gamehub.databinding.CardGameBinding
+import com.knvovk.gamehub.databinding.NetworkStateBinding
 import com.knvovk.gamehub.domain.game.Game
-import com.knvovk.gamehub.presentation.DATE_FORMAT
 import com.knvovk.gamehub.presentation.NetworkState
 import com.knvovk.gamehub.presentation.extensions.showIf
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class GameAdapter(
     private val retryCallback: () -> Unit
@@ -22,6 +25,8 @@ class GameAdapter(
     private var state: NetworkState? = null
 
     companion object {
+        private const val UNKNOWN_VIEW_TYPE = "Unknown View Type"
+        private val dateFormat = DateTimeFormatter.ofPattern("MMM dd, yyyy", Locale.US)
         private val diffCallback = object : DiffUtil.ItemCallback<Game>() {
             override fun areItemsTheSame(oldItem: Game, newItem: Game): Boolean {
                 return oldItem.id == newItem.id
@@ -35,31 +40,31 @@ class GameAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val gameBinding = ItemRecyclerGameBinding.inflate(inflater, parent, false)
-        val networkBinding = ItemNetworkStateBinding.inflate(inflater, parent, false)
+        val gameBinding = CardGameBinding.inflate(inflater, parent, false)
+        val networkBinding = NetworkStateBinding.inflate(inflater, parent, false)
         return when (viewType) {
-            R.layout.item_recycler_game -> GameViewHolder(gameBinding)
-            R.layout.item_network_state -> NetworkStateViewHolder(
+            R.layout.card_game -> GameViewHolder(gameBinding)
+            R.layout.network_state -> NetworkStateViewHolder(
                 networkBinding,
                 retryCallback
             )
-            else -> throw IllegalArgumentException("Unknown View Type")
+            else -> throw IllegalArgumentException(UNKNOWN_VIEW_TYPE)
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         return when (getItemViewType(position)) {
-            R.layout.item_recycler_game -> (holder as GameViewHolder).bind(getItem(position))
-            R.layout.item_network_state -> (holder as NetworkStateViewHolder).bind(state)
-            else -> throw IllegalArgumentException("Unknown View Type")
+            R.layout.card_game -> (holder as GameViewHolder).bind(getItem(position))
+            R.layout.network_state -> (holder as NetworkStateViewHolder).bind(state)
+            else -> throw IllegalArgumentException(UNKNOWN_VIEW_TYPE)
         }
     }
 
     override fun getItemViewType(position: Int): Int {
         return if (hasExtraRow() && position == itemCount - 1) {
-            R.layout.item_network_state
+            R.layout.network_state
         } else {
-            R.layout.item_recycler_game
+            R.layout.card_game
         }
     }
 
@@ -92,7 +97,7 @@ class GameAdapter(
     }
 
     class GameViewHolder(
-        private val binding: ItemRecyclerGameBinding
+        private val binding: CardGameBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(game: Game?) {
@@ -104,14 +109,14 @@ class GameAdapter(
                     textName.text = game.name
                     var metaColor = 0
                     when (game.metacritic) {
-                        in 75..100 -> metaColor = R.color.colorPastelGreen
-                        in 50..74 -> metaColor = R.color.colorParisDaisy
-                        in 0..49 -> metaColor = R.color.colorCarnation
+                        in 75..100 -> metaColor = R.color.colorGreen
+                        in 50..74 -> metaColor = R.color.colorYellow
+                        in 0..49 -> metaColor = R.color.colorRed
                     }
                     chipMetacritic.setChipStrokeColorResource(metaColor)
                     chipMetacritic.setTextColor(ContextCompat.getColor(root.context, metaColor))
                     chipMetacritic.text = game.metacritic.toString()
-                    textRelease.text = game.released.format(DATE_FORMAT)
+                    textReleaseDate.text = game.released.format(dateFormat)
                     textReleaseDelimiter.showIf(game.genres.isNotEmpty())
                     textGenres.text = game.genres.joinToString { it._name }
                     textPlatforms.text = game.platforms.joinToString { it._name }
@@ -121,7 +126,7 @@ class GameAdapter(
     }
 
     class NetworkStateViewHolder(
-        private val binding: ItemNetworkStateBinding,
+        private val binding: NetworkStateBinding,
         private val retryCallback: () -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -132,7 +137,6 @@ class GameAdapter(
         fun bind(state: NetworkState?) {
             with(binding) {
                 textError.showIf(state === NetworkState.Failure)
-                textErrorHelp.showIf(state === NetworkState.Failure)
                 buttonRetry.showIf(state === NetworkState.Failure)
                 progressBar.showIf(state === NetworkState.Loading)
             }

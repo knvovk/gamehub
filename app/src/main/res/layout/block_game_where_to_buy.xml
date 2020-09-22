@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:layout_margin="16dp"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <TextView
+        style="@style/App.TextView.Header"
+        android:id="@+id/headerWhereToBuy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textTags"
+        android:text="@string/header_where_to_buy"/>
+
+    <HorizontalScrollView
+        style="@style/App.HorizontalScrollView"
+        android:id="@+id/hViewStores"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerWhereToBuy">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupStores"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.chip.Chip
+                style="@style/App.Chip.Store"
+                android:id="@+id/chipSteam"
+                android:text="@string/text_steam"/>
+
+            <com.google.android.material.chip.Chip
+                style="@style/App.Chip.Store"
+                android:id="@+id/chipGog"
+                android:text="@string/text_gog"/>
+
+            <com.google.android.material.chip.Chip
+                style="@style/App.Chip.Store"
+                android:id="@+id/chipXboxStore"
+                android:text="@string/text_xbox_store"/>
+
+            <com.google.android.material.chip.Chip
+                style="@style/App.Chip.Store"
+                android:id="@+id/chipPlayStationStore"
+                android:text="@string/text_playstation_store"/>
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+</merge>

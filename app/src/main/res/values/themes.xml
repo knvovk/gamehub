@@ -16,7 +16,8 @@
         <item name="colorSurface">@color/colorSurface</item>
         <item name="colorError">@color/colorError</item>
 
-        <item name="android:statusBarColor">@android:color/transparent</item>
+<!--        <item name="android:windowTranslucentStatus">true</item>-->
+        <item name="android:statusBarColor">#33000000</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 </resources>

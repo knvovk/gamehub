@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:layout_margin="16dp"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <TextView
+        style="@style/App.TextView.Header"
+        android:id="@+id/headerVideos"
+        android:text="@string/header_videos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hViewScreenshots"/>
+
+    <HorizontalScrollView
+        style="@style/App.HorizontalScrollView"
+        android:id="@+id/hViewVideos"
+        android:layout_height="160dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerVideos">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/App.CardView.ImageCard"
+                android:id="@+id/cardVideo1">
+
+                <ImageView
+                    style="@style/App.ImageView.Video"
+                    android:id="@+id/imgVideo1"
+                    android:src="@drawable/fragment_game_details_video_1"
+                    android:contentDescription="@string/desc_game_video"/>
+
+                <ImageView
+                    style="@style/App.ImageView.Icon.Play"
+                    android:src="@drawable/ic_play"
+                    android:contentDescription="@string/desc_game_video"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/App.CardView.ImageCard"
+                android:id="@+id/cardVideo2"
+                android:layout_marginStart="8dp">
+
+                <ImageView
+                    style="@style/App.ImageView.Video"
+                    android:id="@+id/imgVideo2"
+                    android:src="@drawable/fragment_game_details_video_2"
+                    android:contentDescription="@string/desc_game_video"/>
+
+                <ImageView
+                    style="@style/App.ImageView.Icon.Play"
+                    android:src="@drawable/ic_play"
+                    android:contentDescription="@string/desc_game_video"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/App.CardView.ImageCard"
+                android:id="@+id/cardVideo3"
+                android:layout_marginStart="8dp">
+
+                <ImageView
+                    style="@style/App.ImageView.Video"
+                    android:id="@+id/imgVideo3"
+                    android:src="@drawable/fragment_game_details_video_3"
+                    android:contentDescription="@string/desc_game_video"/>
+
+                <ImageView
+                    style="@style/App.ImageView.Icon.Play"
+                    android:src="@drawable/ic_play"
+                    android:contentDescription="@string/desc_game_video"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/App.CardView.ImageCard"
+                android:id="@+id/cardVideo4"
+                android:layout_marginStart="8dp">
+
+                <ImageView
+                    style="@style/App.ImageView.Video.Overlay"
+                    android:id="@+id/imgVideo4"
+                    android:src="@drawable/fragment_game_details_video_4"
+                    android:contentDescription="@string/desc_game_video"/>
+
+                <Button
+                    style="@style/App.Button.TextButton"
+                    android:id="@+id/buttonViewAll"
+                    android:layout_gravity="center"
+                    android:text="@string/button_view_all"/>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </HorizontalScrollView>
+</merge>
